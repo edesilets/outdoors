@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-node('master') {
+pipeline {
     try {
         stages {
             stage('Build') {

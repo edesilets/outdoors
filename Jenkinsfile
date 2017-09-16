@@ -14,7 +14,7 @@ pipeline {
                 // need to copy from location that has the env stored.....
                 sh 'cp .env.example .env'
                 echo 'generate artisan project key'
-                sh 'artisan key:generate'
+                sh 'php artisan key:generate'
             }
         }
         stage('Test') {

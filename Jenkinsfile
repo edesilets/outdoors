@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                // ansible-playbook -i ./ansible/hosts ./ansible/deploy.yml
+                ansible-playbook ./deploy/scripts/playbook.yml
             }
         }
     }

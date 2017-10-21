@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 // ansible-playbook "./deploy/scripts/playbook.yml"
-                ansiblePlaybook('path/playbook.yml') {
+                ansiblePlaybook('deploy/scripts/playbook.yml') {
                     inventoryPath('hosts.ini')
                     ansibleName('Ansible 2.0.0.2')
                     tags('one,two')

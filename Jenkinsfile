@@ -45,3 +45,13 @@ pipeline {
         }
     }
 }
+
+if (env.BRANCH_NAME == 'master') {
+  stage 'Deploy Production'
+  println 'This happens only on master'
+} else if(env.BRANCH_NAME == 'messing-with-jenkins') {
+  println 'Hello from messwith with jenkins!'
+} else {
+  stage 'Other branches'
+  println "Current branch ${env.BRANCH_NAME}"
+}

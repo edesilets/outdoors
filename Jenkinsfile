@@ -40,7 +40,7 @@ pipeline {
                 expression { env.BRANCH_NAME == 'master' }
             }
             steps {
-                echo "Deploying...."
+                echo "Deploying....."
                 wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
                     ansiblePlaybook( 
                         playbook: './deploy/scripts/playbook.yml',

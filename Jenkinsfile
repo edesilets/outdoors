@@ -14,7 +14,8 @@ pipeline {
                 sh 'cp .env.example .env'
                 echo 'generate artisan project key'
                 sh 'php artisan key:generate'
-                echo "one last thing $WORKSPACE"
+                echo "Work Space path? ${WORKSPACE}"
+                echo "Params Person: ${params.PERSON}"
             }
         }
         stage('Test') {
@@ -31,12 +32,15 @@ pipeline {
         }
         stage('Deploy Production') {
             steps {
-                echo "Deploying.... ${params.PERSON}"
-                ansiblePlaybook( 
-                    playbook: './deploy/scripts/playbook.yml',
-                    inventory: './deploy/scripts/playbook.yml', 
-                    credentialsId: 'sample-ssh-key', 
-                    extras: '-e parameter="some value"')
+                echo "Deploying...."
+                wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
+                    ansiblePlaybook( 
+                        playbook: './deploy/scripts/playbook.yml',
+                        inventory: './deploy/scripts/playbook.yml',
+                        credentialsId: 'sample-ssh-key',
+                        extras: '-e parameter="some value"',
+                        colorized: true) 
+                }
             }
         }
     }

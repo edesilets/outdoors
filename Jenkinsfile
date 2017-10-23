@@ -15,6 +15,7 @@ pipeline {
                 sh 'cp .env.example .env'
                 echo 'generate artisan project key'
                 sh 'php artisan key:generate'
+                echo "one last thing $WORKSPACE"
             }
         }
         stage('Test') {
@@ -25,8 +26,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying.... ${params.PERSON}'
-                // ansible-playbook "./deploy/scripts/playbook.yml"
+                echo "Deploying.... ${params.PERSON}"
+                // sh "ansible-playbook ./deploy/scripts/playbook.yml"
                 ansiblePlaybook('deploy/scripts/playbook.yml') {
                     inventoryPath('hosts.ini')
                     ansibleName('Ansible 2.0.0.2')

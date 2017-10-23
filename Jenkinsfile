@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying.... ${params.PERSON}'
                 // ansible-playbook "./deploy/scripts/playbook.yml"
                 ansiblePlaybook('deploy/scripts/playbook.yml') {
                     inventoryPath('hosts.ini')

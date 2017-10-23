@@ -23,27 +23,20 @@ pipeline {
                 sh './vendor/bin/phpunit'
             }
         }
-        stage('Deploy') {
+        stage('Deploy Staging') {
+            steps {
+                echo 'Testing..'
+                sh './vendor/bin/phpunit'
+            }
+        }
+        stage('Deploy Production') {
             steps {
                 echo "Deploying.... ${params.PERSON}"
                 ansiblePlaybook( 
                     playbook: './deploy/scripts/playbook.yml',
-                    // inventory: './deploy/scripts/playbook.yml', 
+                    inventory: './deploy/scripts/playbook.yml', 
                     credentialsId: 'sample-ssh-key', 
                     extras: '-e parameter="some value"')
-                // sh "ansible-playbook ./deploy/scripts/playbook.yml"
-                // ansiblePlaybook('./deploy/scripts/playbook.yml') {
-                    // inventoryPath('hosts.ini')
-                    // ansibleName('Ansible 2.0.0.2')
-                    // tags('one,two')
-                    // credentialsId('credsid')
-                    // sudo(true)
-                    // sudoUser("root")
-                    // extraVars {
-                    //     extraVar("key1", "value1", false)
-                    //     extraVar("key2", "value2", true)
-                    // }
-                // }
             }
         }
     }

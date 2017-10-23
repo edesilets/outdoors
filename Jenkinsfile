@@ -30,14 +30,14 @@ pipeline {
                 ansiblePlaybook('deploy/scripts/playbook.yml') {
                     inventoryPath('hosts.ini')
                     ansibleName('Ansible 2.0.0.2')
-                    tags('one,two')
-                    credentialsId('credsid')
+                    // tags('one,two')
+                    // credentialsId('credsid')
                     sudo(true)
                     sudoUser("root")
-                    extraVars {
-                        extraVar("key1", "value1", false)
-                        extraVar("key2", "value2", true)
-                    }
+                    // extraVars {
+                    //     extraVar("key1", "value1", false)
+                    //     extraVar("key2", "value2", true)
+                    // }
                 }
             }
         }

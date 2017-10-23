@@ -25,12 +25,20 @@ pipeline {
             }
         }
         stage('Deploy Staging') {
+            when {
+                // Only run Deploy Production if branch is staging
+                expression { env.BRANCH_NAME == 'messing-with-jenkins' }
+            }
             steps {
                 echo 'Testing..'
                 sh './vendor/bin/phpunit'
             }
         }
         stage('Deploy Production') {
+            when {
+                // Only run Deploy Production if branch is master
+                expression { env.BRANCH_NAME == 'master' }
+            }
             steps {
                 echo "Deploying...."
                 wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
@@ -44,14 +52,4 @@ pipeline {
             }
         }
     }
-}
-
-if (env.BRANCH_NAME == 'master') {
-  stage 'Deploy Production'
-  println 'This happens only on master'
-} else if(env.BRANCH_NAME == 'messing-with-jenkins') {
-  println 'Hello from messwith with jenkins!'
-} else {
-  stage 'Other branches'
-  println "Current branch ${env.BRANCH_NAME}"
 }

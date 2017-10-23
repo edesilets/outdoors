@@ -36,8 +36,7 @@ pipeline {
                 expression { env.BRANCH_NAME == 'messing-with-jenkins' }
             }
             steps {
-                echo 'Testing..'
-                sh './vendor/bin/phpunit'
+                echo 'O ya deploy to staging!'
             }
         }
         stage('Deploy Production') {

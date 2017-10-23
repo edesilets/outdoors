@@ -36,7 +36,7 @@ pipeline {
                 wrap([$class: 'AnsiColorBuildWrapper', colorMapName: "xterm"]) {
                     ansiblePlaybook( 
                         playbook: './deploy/scripts/playbook.yml',
-                        inventory: './deploy/scripts/playbook.yml',
+                        inventory: './deploy/scripts/hosts',
                         credentialsId: 'sample-ssh-key',
                         extras: '-e parameter="some value"',
                         colorized: true) 

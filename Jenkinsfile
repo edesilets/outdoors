@@ -23,6 +23,12 @@ pipeline {
                 echo 'Testing..'
                 sh './vendor/bin/phpunit'
             }
+            post { 
+                //  Other flags always, changed, failure, success, unstable, and aborted
+                always { 
+                    echo 'Testing is so messy! Time to clean up.'
+                }
+            }
         }
         stage('Deploy Staging') {
             when {
